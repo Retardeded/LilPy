@@ -4,7 +4,7 @@ import time
 
 Digits = namedtuple("Digits", "d u")
 
-def seletcion_sort(tab):
+def selection_sort(tab):
   numberOfNum = len(tab)
   for i in range(0, numberOfNum):
     max = tab[i]
@@ -66,19 +66,21 @@ def quick_sort(tab, b, e):
         quick_sort(tab, leftIndex, e)
 
 def merge(tab, b, pivot, e):
-    first = b
-    second = pivot+1
+
     firstList = []
     secondList = []
-    index = 0
+    index = b
 
-    for i in range(b, pivot):
+    for i in range(b, pivot+1):
         firstList.append(tab[i])
-    for i in range(pivot+1, e):
+    for i in range(pivot+1, e+1):
         secondList.append(tab[i])
 
-    while(first < pivot+1 and second < e):
-        if(firstList[first] < secondList[second]):
+    first = 0
+    second = 0
+
+    while(first < pivot+1-b and second < e-pivot):
+        if(firstList[first] > secondList[second]):
             tab[index] = firstList[first]
             index += 1
             first += 1
@@ -86,24 +88,21 @@ def merge(tab, b, pivot, e):
             tab[index] = secondList[second]
             index += 1
             second += 1
-    while(first < pivot+1):
+    while(first < pivot+1-b):
         tab[index] = firstList[first]
         index += 1
         first += 1
-    while (second < e):
+    while (second < e-pivot):
         tab[index] = secondList[second]
         index += 1
         second += 1
 
 def merge_sort(tab, b, e):
-    pivot = 0
-    if(b - e > 5):
-        pivot = int(b+e/2)
+    if(e > b):
+        pivot = int((b+e)/2)
         merge_sort(tab, b, pivot) #
         merge_sort(tab, pivot+1, e)
         merge(tab, b, pivot, e)
-    else:
-        insertion_sort(tab, b, e)
 
 def heap_create(tab):
   numberOfNum = len(tab)
@@ -213,44 +212,54 @@ def count_sort2(tab):
         list_of_index[tab[i].d] += 1
     return sorted_tab
 
-numberOfNum = 500000
+numberOfNum = 500
 tab = []
 
 for k in range(0, numberOfNum):
     tab.append(randint(0, 99))
 
-tab_copy = tab
+tab_copy = []
+for k in range(0, numberOfNum):
+    tab_copy.append(tab[k])
+
 """/
 start_time = time.time()
 bubble_sort(tab_copy)
 print("Bubble sort took: " + str(time.time()-start_time)+ " seconds")
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
-seletcion_sort(tab_copy)
+selection_sort(tab_copy)
 print("Selection sort took: " + str(time.time()-start_time)+ " seconds")
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
 insertion_sort(tab_copy, 0, len(tab_copy))
 print("Insertion sort took: " + str(time.time()-start_time)+ " seconds")
-"""
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
 quick_sort(tab_copy, 0, len(tab_copy)-1)
 print("Quick sort took: " + str(time.time()-start_time)+ " seconds")
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
 merge_sort(tab_copy, 0, len(tab_copy)-1)
 print("Merge sort took: " + str(time.time()-start_time)+ " seconds")
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
 heap_tab = heap_create(tab_copy)
 tab_copy = heap_sort(heap_tab)
 print("Heap sort took: " + str(time.time()-start_time)+ " seconds")
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
 tab_copy = bucket_sort(tab_copy)
 print("Bucket sort took: " + str(time.time()-start_time)+ " seconds")
-tab_copy = tab
+for k in range(0, numberOfNum):
+    tab_copy[k] = tab[k]
 start_time = time.time()
 tab_copy = radix_sort(tab_copy)
 print("Radix sort took: " + str(time.time()-start_time)+ " seconds")
+"""
