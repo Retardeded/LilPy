@@ -6,7 +6,7 @@ nCopy = n
 height = 0
 
 while(nCopy > 1):
-  height +=  n
+  height +=  nCopy
   nCopy -= 1
 
 sameSet = True
@@ -23,4 +23,4 @@ for i in range(height):
     if(width == maxWidth ):
       width = 1
       sameSet = True
-  print("\n")
+  print("")
