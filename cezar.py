@@ -3,16 +3,14 @@ from math import *
 
 def remove_space(text):
   tmp = []
-  to_low = 20
+  to_low = 32
   for i in range(0, len(text)):
-    print(ord(text[i]))
-
     if(ord(text[i]) != 32 ):
-      if(ord(text[i]) > 90):
-        letter = chr(ord(text[i]) - to_low)
-        tmp.append(letter)
-      else:
-        tmp.append(text[i])
+        if(ord(text[i]) <= 90):
+            letter = chr(ord(text[i]) + to_low)
+            tmp.append(letter)
+        else:
+            tmp.append(text[i])
 
   return tmp
 
@@ -28,7 +26,7 @@ def decrypt_cezar(text, value):
     letter_encoded = 97 + (letter_encoded-97 - value) % 26
     text[i] = chr(letter_encoded)
 
-text = "teskt do zaszyfrowania"
+text = "TEKST do zaszyfrowania"
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 alphabet_chars = []
@@ -43,7 +41,7 @@ value_to_sub = 97
 random_value = 2
 
 print(chars)
-char = remove_space(chars)
+chars = remove_space(chars)
 print(chars)
 encrypt_cezar(chars, random_value)
 print(chars)
