@@ -23,8 +23,16 @@ def countNumbers(array_of_stats, numbers):
         value = array_of_stats[numbers[i]].h + 1
         array_of_stats[numbers[i]] = Digits(array_of_stats[numbers[i]].p, value)
 
-n = 30
-numbers = [5, 7, 4, 18, 3, 7, 5, 1, 2, 12, 7, 13]
+numbers = [int(x) for x in input().split()]
+#[5, 7, 4, 18, 3, 7, 5, 1, 2, 12, 7, 13]
+m = len(numbers)
+n = 0
+for i in range(m):
+    if(numbers[i] > n):
+        n = numbers[i]
+
+n = n + 1
+
 array_of_stats = [Digits] * n
 for i in range(0, n):
     array_of_stats[i] = Digits(0, 0)
